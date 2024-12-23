@@ -17,6 +17,7 @@ export default function Examples() {
   return (
     <Section title="Examples" id="examples">
       <Tabs
+        buttonsContainer="menu"
         buttons={
           <>
             {/* If we don't use arrow function then the function will be called on Render and not on-click */}
