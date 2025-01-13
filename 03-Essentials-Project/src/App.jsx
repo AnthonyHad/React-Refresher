@@ -12,6 +12,8 @@ function App() {
     duration: 10,
   });
 
+  const inputIsValid = calculatorInputs.duration >= 1;
+
   const handleInputsChange = (event) => {
     const { name, value } = event.target;
     setCalculatorInputs((prevInputs) => ({
@@ -26,7 +28,8 @@ function App() {
         calculatorInputs={calculatorInputs}
         onChange={handleInputsChange}
       />
-      <Results inputs={calculatorInputs} />
+      {!inputIsValid && <p className="center">Please enter a valid duration</p>}
+      {inputIsValid && <Results inputs={calculatorInputs} />}
     </>
   );
 }
