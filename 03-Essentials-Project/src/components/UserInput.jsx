@@ -1,21 +1,6 @@
 import { useState } from "react";
 
-export default function UserInput() {
-  const [calculatorInputs, setCalculatorInputs] = useState({
-    initialInvestment: 10000,
-    annualInvestment: 1200,
-    expectedReturn: 6,
-    duration: 10,
-  });
-
-  const handleInputsChange = (event) => {
-    const { name, value } = event.target;
-    setCalculatorInputs((prevInputs) => ({
-      ...prevInputs,
-      [name]: value,
-    }));
-  };
-
+export default function UserInput({ onChange, calculatorInputs }) {
   return (
     <section id="user-input">
       <div className="input-group">
@@ -26,7 +11,7 @@ export default function UserInput() {
             value={calculatorInputs.initialInvestment}
             type="number"
             required
-            onChange={(e) => handleInputsChange(e)}
+            onChange={(e) => onChange(e)}
           />
         </p>
         <p>
@@ -36,7 +21,7 @@ export default function UserInput() {
             type="number"
             value={calculatorInputs.annualInvestment}
             required
-            onChange={(e) => handleInputsChange(e)}
+            onChange={(e) => onChange(e)}
           />
         </p>
       </div>
@@ -48,7 +33,7 @@ export default function UserInput() {
             name="expectedReturn"
             value={calculatorInputs.expectedReturn}
             required
-            onChange={(e) => handleInputsChange(e)}
+            onChange={(e) => onChange(e)}
           />
         </p>
         <p>
@@ -58,7 +43,7 @@ export default function UserInput() {
             name="duration"
             value={calculatorInputs.duration}
             required
-            onChange={(e) => handleInputsChange(e)}
+            onChange={(e) => onChange(e)}
           />
         </p>
       </div>
