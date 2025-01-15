@@ -15,6 +15,10 @@ export default function Player() {
   function handleClick() {
     // setSubmittedPlayerName(true);
     setEnteredPlayerName(playerName.current.value);
+    // We usully want to let  React handle DOM updates but in this case it's fine
+    // We should avoid sing refs to manipulate and update the DOM
+    // With Refs the component function is not re-rendered
+    playerName.current.value = "";
   }
   return (
     <section id="player">
