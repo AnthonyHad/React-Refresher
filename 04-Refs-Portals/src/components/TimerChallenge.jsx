@@ -22,8 +22,12 @@ export default function TimerChallenge({ title, targetTime }) {
   // Could create an infinite loop but because we have the if statement it will not
   if (timeRemaining <= 0) {
     clearInterval(timer.current);
+
+    dialog.current.open();
+  }
+
+  function handleReset() {
     setTimerRemaining(targetTime * 1000);
-    dialog.current.showModal();
   }
 
   function handleStart() {
@@ -33,12 +37,17 @@ export default function TimerChallenge({ title, targetTime }) {
   }
 
   function handleStop() {
-    dialog.current.showModal();
+    dialog.current.open();
     clearInterval(timer.current);
   }
   return (
     <>
-      <ResultModal ref={dialog} result="lost" targetTime={targetTime} />
+      <ResultModal
+        ref={dialog}
+        remainingTime={timeRemaining}
+        targetTime={targetTime}
+        onReset={handleReset}
+      />
 
       <section className="challenge">
         <h2>{title}</h2>
