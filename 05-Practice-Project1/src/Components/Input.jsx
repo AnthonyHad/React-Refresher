@@ -8,7 +8,7 @@ export default function Input({ textArea, label, ...props }) {
         {label}
       </label>
       {textArea ? (
-        <textArea className={classes} {...props} />
+        <textarea className={classes} {...props} />
       ) : (
         <input className={classes} {...props} />
       )}
