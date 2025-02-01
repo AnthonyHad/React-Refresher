@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 
 import Places from "./components/Places.jsx";
 import { AVAILABLE_PLACES } from "./data.js";
@@ -50,7 +50,7 @@ function App() {
     // modal.current.close();
   }
 
-  // We can use react hooks in functions or if statements.
+  // We cannot use react hooks in functions or if statements.
   function handleSelectPlace(id) {
     setPickedPlaces((prevPickedPlaces) => {
       if (prevPickedPlaces.some((place) => place.id === id)) {
@@ -68,7 +68,9 @@ function App() {
     }
   }
 
-  function handleRemovePlace() {
+  // useCallback is used to memoize the function. This means that the function will not be recreated on each render of the surronuding component.
+  // It's also used mainly when passing functions as dependencies to other hooks such as useEffect.
+  const handleRemovePlace = useCallback(function handleRemovePlace() {
     setPickedPlaces((prevPickedPlaces) =>
       prevPickedPlaces.filter((place) => place.id !== selectedPlace.current)
     );
@@ -79,7 +81,7 @@ function App() {
       "selectedPlaces",
       JSON.stringify(storedIds.filter((id) => id !== selectedPlace.current))
     );
-  }
+  }, []);
 
   return (
     <>
@@ -87,6 +89,7 @@ function App() {
         <DeleteConfirmation
           onCancel={handleStopRemovePlace}
           onConfirm={handleRemovePlace}
+          onClose={handleStopRemovePlace}
         />
       </Modal>
 
