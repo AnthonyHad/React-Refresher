@@ -7,6 +7,7 @@ import Summary from "./Summary.jsx";
 export default function Quiz() {
   const [userAnswers, setUserAnswers] = useState([]);
 
+  // Derived State from answers
   const activeQuestionIndex = userAnswers.length;
   const quizIsComplete = activeQuestionIndex === QUESTIONS.length;
 
@@ -39,5 +40,3 @@ export default function Quiz() {
     </div>
   );
 }
-
-// Derived State from answers
