@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 // Custom hooks need to start with use and react enforces hook rules.
+// Usage of hook in different components will not share state.
 
 export function useFetch(fetchFn, initialValue) {
   const [isFetching, setIsFetching] = useState();
