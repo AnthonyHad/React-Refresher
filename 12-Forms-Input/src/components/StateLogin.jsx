@@ -1,6 +1,6 @@
-import { useState } from "react";
 import Input from "./Input";
 import { isEmail, isNotEmpty, hasMinLength } from "../util/validation";
+import { useInput } from "../hooks/useInput";
 
 export default function Login() {
   // Default behavior of the form element is to reload the page on-submit and send an HTTP request to the server
@@ -11,15 +11,21 @@ export default function Login() {
   // const [enteredEmail, setEnteredEmail] = useState("");
   // const [enteredPassword, setEnteredPassword] = useState("");
 
-  const [enteredValues, setEnteredValues] = useState({
-    email: "",
-    password: "",
-  });
+  // const [enteredValues, setEnteredValues] = useState({
+  //   email: "",
+  //   password: "",
+  // });
 
-  const [didEdit, setDidEdit] = useState({
-    email: false,
-    password: false,
-  });
+  // const [didEdit, setDidEdit] = useState({
+  //   email: false,
+  //   password: false,
+  // });
+
+  const {
+    value: emailValue,
+    handleInputChange: handleEmailChange,
+    handleInputBlur: handleEmailBlur,
+  } = useInput("");
 
   const emailIsInvalid =
     didEdit.email &&
@@ -47,17 +53,17 @@ export default function Login() {
   //   setEnteredPassword(event.target.value);
   // }
 
-  function handleInputChange(identifier, value) {
-    setEnteredValues((prevState) => ({
-      ...prevState,
-      [identifier]: value,
-    }));
+  // function handleInputChange(identifier, value) {
+  //   setEnteredValues((prevState) => ({
+  //     ...prevState,
+  //     [identifier]: value,
+  //   }));
 
-    setDidEdit((prevState) => ({
-      ...prevState,
-      [identifier]: false,
-    }));
-  }
+  //   setDidEdit((prevState) => ({
+  //     ...prevState,
+  //     [identifier]: false,
+  //   }));
+  // }
 
   function handleInputBlur(identifier) {
     setDidEdit((prevState) => ({
@@ -78,9 +84,12 @@ export default function Login() {
           name="email"
           type="email"
           error={emailIsInvalid && "Please enter a valid email"}
-          onBlur={() => handleInputBlur("email")}
-          value={enteredValues.email}
-          onChange={(event) => handleInputChange("email", event.target.value)}
+          // onBlur={() => handleInputBlur("email")}
+          onBlur={handleEmailBlur}
+          onChange={handleEmailChange}
+          // value={enteredValues.email}
+          value={emailValue}
+          // onChange={(event) => handleInputChange("email", event.target.value)}
         />
         {/* <div className="control no-margin">
           <label htmlFor="email">Email</label>
