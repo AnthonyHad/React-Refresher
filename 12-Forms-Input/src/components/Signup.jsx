@@ -1,4 +1,8 @@
+import { useState } from "react";
+
 export default function Signup() {
+  const [passwordsAreNotEqual, setPasswordsAreNotEqual] = useState(false);
+
   function handleSubmit(event) {
     event.preventDefault();
     // FormData is a built-in native browser API that allows us to create a new FormData object from a form element
@@ -10,9 +14,15 @@ export default function Signup() {
     data.acquisition = acquisitionChannel;
     console.log(data);
 
+    if (data.password !== data["confirm-password"]) {
+      setPasswordsAreNotEqual(true);
+      return;
+    }
+
     // event.target.reset();
   }
 
+  // Form validation can be done using special attributes like required, minLength, maxLength, etc.
   return (
     <form onSubmit={handleSubmit}>
       <h2>Welcome on board!</h2>
@@ -26,7 +36,16 @@ export default function Signup() {
       <div className="control-row">
         <div className="control">
           <label htmlFor="password">Password</label>
-          <input id="password" type="password" name="password" />
+          <input
+            id="password"
+            type="password"
+            name="password"
+            required
+            minLength={6}
+          />
+          <div className="control-error">
+            {passwordsAreNotEqual && <p>Passwords don't match</p>}
+          </div>
         </div>
 
         <div className="control">
