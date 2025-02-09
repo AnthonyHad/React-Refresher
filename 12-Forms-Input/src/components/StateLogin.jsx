@@ -25,12 +25,13 @@ export default function Login() {
     value: emailValue,
     handleInputChange: handleEmailChange,
     handleInputBlur: handleEmailBlur,
-  } = useInput("");
+  } = useInput("", isEmail);
 
-  const emailIsInvalid =
-    didEdit.email &&
-    !isEmail(enteredValues.email) &&
-    !isNotEmpty(enteredValues.email);
+  // const emailIsInvalid =
+  //   didEdit.email &&
+  //   !isEmail(enteredValues.email) &&
+  //   !isNotEmpty(enteredValues.email);
+
   const passwordIsInvalid =
     didEdit.password && !hasMinLength(enteredValues.password, 6);
 
