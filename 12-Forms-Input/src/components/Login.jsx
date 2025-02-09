@@ -1,37 +1,24 @@
-import { useState } from "react";
+import { useRef } from "react";
 
 export default function Login() {
-  // Default behavior of the form element is to reload the page on-submit and send an HTTP request to the server
-  // We can set the button type directly to "button" to prevent the default behavior which is submitting the form
-  // The more elegant solution is to add the onSubmit event listener to the form element and prevent the default behavior
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
-  // we could use a combined state object to store the email and password values
-  // const [enteredEmail, setEnteredEmail] = useState("");
-  // const [enteredPassword, setEnteredPassword] = useState("");
-
-  const [enteredValues, setEnteredValues] = useState({
-    email: "",
-    password: "",
-  });
+  // Using refs requires less code than using state
+  // Downside is that it's discouraged to use refs to manipulate the DOM directly
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(enteredValues);
-  }
 
-  // function handleEmailChange(event) {
-  //   setEnteredEmail(event.target.value);
-  // }
+    const enteredEmail = emailRef.current.value;
+    const enteredPassword = passwordRef.current.value;
 
-  // function handlePasswordChange(event) {
-  //   setEnteredPassword(event.target.value);
-  // }
+    console.log(enteredEmail, enteredPassword);
 
-  function handleInputChange(identifier, value) {
-    setEnteredValues((prevState) => ({
-      ...prevState,
-      [identifier]: value,
-    }));
+    // Not recommended to manipulate the DOM directly
+    // We can use event.target.reset() to reset the form
+    emailRef.current.value = "";
+    passwordRef.current.value = "";
   }
 
   return (
@@ -41,15 +28,7 @@ export default function Login() {
       <div className="control-row">
         <div className="control no-margin">
           <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            // value={enteredEmail}
-            // onChange={handleEmailChange}
-            value={enteredValues.email}
-            onChange={(event) => handleInputChange("email", event.target.value)}
-          />
+          <input id="email" type="email" name="email" ref={emailRef} />
         </div>
 
         <div className="control no-margin">
@@ -58,12 +37,7 @@ export default function Login() {
             id="password"
             type="password"
             name="password"
-            // value={enteredPassword}
-            value={enteredValues.password}
-            onChange={(event) =>
-              handleInputChange("password", event.target.value)
-            }
-            // onChange={handlePasswordChange}
+            ref={passwordRef}
           />
         </div>
       </div>
