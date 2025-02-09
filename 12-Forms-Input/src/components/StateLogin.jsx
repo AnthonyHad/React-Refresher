@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Input from "./Input";
+import { isEmail, isNotEmpty, hasMinLength } from "../util/validation";
 
 export default function Login() {
   // Default behavior of the form element is to reload the page on-submit and send an HTTP request to the server
@@ -19,7 +21,12 @@ export default function Login() {
     password: false,
   });
 
-  const emailIsInvalid = didEdit.email && !enteredValues.email.includes("@");
+  const emailIsInvalid =
+    didEdit.email &&
+    !isEmail(enteredValues.email) &&
+    !isNotEmpty(enteredValues.email);
+  const passwordIsInvalid =
+    didEdit.password && !hasMinLength(enteredValues.password, 6);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -65,7 +72,17 @@ export default function Login() {
       <h2>Login</h2>
 
       <div className="control-row">
-        <div className="control no-margin">
+        <Input
+          label="Email"
+          id="email"
+          name="email"
+          type="email"
+          error={emailIsInvalid && "Please enter a valid email"}
+          onBlur={() => handleInputBlur("email")}
+          value={enteredValues.email}
+          onChange={(event) => handleInputChange("email", event.target.value)}
+        />
+        {/* <div className="control no-margin">
           <label htmlFor="email">Email</label>
           <input
             id="email"
@@ -80,9 +97,22 @@ export default function Login() {
           <div className="control-error">
             {emailIsInvalid && <p>Please enter a valid email address.</p>}
           </div>
-        </div>
+        </div> */}
 
-        <div className="control no-margin">
+        <Input
+          label="Password"
+          id="password"
+          name="password"
+          type="password"
+          error={passwordIsInvalid && "Please enter a valid password"}
+          onBlur={() => handleInputBlur("password")}
+          value={enteredValues.password}
+          onChange={(event) =>
+            handleInputChange("password", event.target.value)
+          }
+        />
+
+        {/* <div className="control no-margin">
           <label htmlFor="password">Password</label>
           <input
             id="password"
@@ -96,7 +126,7 @@ export default function Login() {
             }
             // onChange={handlePasswordChange}
           />
-        </div>
+        </div> */}
       </div>
 
       <p className="form-actions">
