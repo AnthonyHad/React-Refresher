@@ -1,1 +1,42 @@
-[]
+[
+  {
+    "items": [
+      {
+        "id": "m2",
+        "name": "Margherita Pizza",
+        "price": "12.99",
+        "description": "A classic pizza with fresh mozzarella, tomatoes, and basil on a thin and crispy crust.",
+        "image": "images/margherita-pizza.jpg",
+        "quantity": 3
+      }
+    ],
+    "customer": {
+      "name": "Toto",
+      "email": "toto@toto.com",
+      "street": "Rue saint hyacinthe",
+      "postal-code": "43434",
+      "city": "Beirut"
+    },
+    "id": "371.0353744324728"
+  },
+  {
+    "items": [
+      {
+        "id": "m2",
+        "name": "Margherita Pizza",
+        "price": "12.99",
+        "description": "A classic pizza with fresh mozzarella, tomatoes, and basil on a thin and crispy crust.",
+        "image": "images/margherita-pizza.jpg",
+        "quantity": 3
+      }
+    ],
+    "customer": {
+      "name": "Toto",
+      "email": "toto@toto.com",
+      "street": "Rue saint hyacinthe",
+      "postal-code": "43434",
+      "city": "Beirut"
+    },
+    "id": "822.3523596958955"
+  }
+]
