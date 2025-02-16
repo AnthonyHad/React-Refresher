@@ -23,6 +23,14 @@ export default function Meals() {
   //   return <p>No meals found</p>;
   // }
 
+  if (isLoading) {
+    return <p className="center">Fetching meals...</p>;
+  }
+
+  if (error) {
+    return <Error title="Failed to fetch meals" message={error} />;
+  }
+
   // Before custom hook:
   // const [loadedMeals, setLoadedMeals] = useState([]);
 
